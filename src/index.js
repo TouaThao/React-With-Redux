@@ -8,9 +8,8 @@ import { Provider} from 'react-redux';
 import logger from 'redux-logger'
 
 
-const snackReducer = (state = [] , action)=>{
+const snackReducer = (state = [ ] , action)=>{
     if(action.type === 'Add_Snack'){
-        console.log(action.payload);
         return [...state, action.payload ]
     }
    return state
@@ -18,13 +17,12 @@ const snackReducer = (state = [] , action)=>{
 
 const StoreInstance = createStore(
     combineReducers({
-        snackReducer,
-
+        snackReducer
     }),
     applyMiddleware(logger)
 )
 
 
 
-ReactDOM.render(<Provider store={StoreInstance}><App /></Provider>, document.getElementById('root'));
+ReactDOM.render(<Provider store={StoreInstance}><App/></Provider>, document.getElementById('root'));
 registerServiceWorker();

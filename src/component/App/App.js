@@ -6,16 +6,23 @@ import { connect } from 'react-redux'
 import SnackList from '../SnackList/SnackList'
 
 class App extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
-      newSnack : '',
+      newSnack: {
+        person: '',
+        snack: ''
+      }
+
     }
   }
 
-  handleSnackChange = (event) =>{
+  handleSnackChange = (propertyName) => (event) => {
     this.setState({
-      newSnack : event.target.value
+      newSnack: {
+        ...this.state.newSnack,
+        [propertyName]: event.target.value
+      }
     })
   }
 
@@ -23,16 +30,17 @@ class App extends Component {
   render() {
     return (
       <div >
-       <input type="text" onChange={this.handleSnackChange}></input>
-      <button onClick={()=> this.props.dispatch({type: 'Add_Snack', payload: this.state.newSnack})}>Button three</button>
-        <SnackList SnackList = {this.props.reduxState.snackReducer}/>
+        <input type="text" placeholder="name" onChange={this.handleSnackChange('person')} />
+        <input type="text" placeholder="Snack" onChange={this.handleSnackChange('snack')} />
+        <button onClick={() => this.props.dispatch({ type: 'Add_Snack', payload: this.state.newSnack })}>Button</button>
+        <SnackList />
       </div>
     );
   }
 }
 
-const mapReduxStateToProps = (reduxState)=>{
-  return {reduxState}
+const mapReduxStateToProps = (reduxState) => {
+  return { SnackList: reduxState.snackReducer }
 }
 
 

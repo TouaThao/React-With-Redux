@@ -5,7 +5,7 @@ class Snack extends Component {
 
     return (
       <div>
-        <p onClick={() =>this.props.showSnackList(this.props.name)}> {this.props.name} </p>
+        <li> Name: {this.props.SnackData.person} and They give {this.props.SnackData.snack} Out</li>
       </div>
     );
   }
